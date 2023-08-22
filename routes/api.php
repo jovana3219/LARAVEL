@@ -14,3 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
+
+Route::post('login', [\App\Http\Controllers\UserController::class, 'prijava']);
+Route::post('register', [\App\Http\Controllers\UserController::class, 'registracija']);
+
+Route::middleware('auth:sanctum')->group( function () {
+    Route::resource('tipovi', \App\Http\Controllers\TipController::class);
+    Route::resource('ukusi', \App\Http\Controllers\UkusController::class);
+    Route::resource('proizvodi', \App\Http\Controllers\ProizvodController::class);
+});
+
